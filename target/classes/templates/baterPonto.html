@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Ponto</title>
+</head>
+<body>
+    <div>
+        <h1>Registrar ponto</h1>
+        <form th:action="@{/baterPonto}" method="post" th:object="${batida}">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" th:field="*{matricula}" required>
+            <button type="submit">Bater Ponto</button>
+        </form>
+        <a th:href="@{/}">Voltar</a>
+    </div>
+</body>
+</html>
