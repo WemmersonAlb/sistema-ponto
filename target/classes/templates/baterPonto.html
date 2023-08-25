@@ -12,6 +12,8 @@
             <label for="matricula">Matrícula:</label>
             <input type="text" id="matricula" name="matricula" th:field="*{matricula}" required>
             <button type="submit">Bater Ponto</button>
+            <p><span th:text="${sucesso}" style="color: green;"></span></p>
+            <p><span th:text="${erro}" style="color: red;"></span></p>
         </form>
         <a th:href="@{/}">Voltar</a>
     </div>

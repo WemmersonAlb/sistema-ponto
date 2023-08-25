@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,12 +31,11 @@ public class BatidaController {
 
     @GetMapping("/baterPonto")
     public String showBaterPonto(Model model){
-        BatidaDTO batida = new BatidaDTO();
-        model.addAttribute("batida", batida);
+        model.addAttribute("batida", new BatidaDTO());
         return "baterPonto";
     }
     @PostMapping("/baterPonto")
-    public String baterPonto(@Valid @RequestParam BatidaDTO batida, Model model, BindingResult result){
+    public String baterPonto(@Valid @ModelAttribute("batida") BatidaDTO batida, Model model, BindingResult result){
         if(result.hasErrors()){
             return "baterPonto";
         }
@@ -50,8 +50,7 @@ public class BatidaController {
                 batidaModel.setHoraSaida(hora);
                 String mensagem = String.format("Saída registrada de %s", funcionarioOptional.get().getNomeFuncionario());
                 model.addAttribute("sucesso", mensagem);
-
-                return "redirect:/baterPonto";
+                batidaRepository.save(batidaModel);
             }else{//Caso não tenha registro de entrada
                 String mensagem = String.format("Entrada registrada de %s", funcionarioOptional.get().getNomeFuncionario());
                 BatidaModel batidaModel = new BatidaModel();
@@ -59,12 +58,12 @@ public class BatidaController {
                 batidaModel.setHoraEntrada(hora);
                 batidaModel.setFuncionario(funcionarioOptional.get());
                 model.addAttribute("sucesso", mensagem);
-
-                return "redirect:/baterPonto";
+                batidaRepository.save(batidaModel);
             }
+            return "baterPonto";
         } else {
             model.addAttribute("erro", "Funcionário não cadastrado");
-            return "redirect:/baterPonto";
+            return "baterPonto";
         }
     }
 }
