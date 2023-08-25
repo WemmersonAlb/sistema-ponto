@@ -1,6 +1,7 @@
 package com.sistemaponto.demo.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +12,5 @@ import com.sistemaponto.demo.model.FuncionarioModel;
 
 public interface BatidaRepository extends JpaRepository<BatidaModel, UUID>{
     Optional<BatidaModel> findByFuncionarioAndDia(FuncionarioModel funcionario, LocalDate dia);
+    List<BatidaModel> findAllByFuncionario(FuncionarioModel funcionario);
 }

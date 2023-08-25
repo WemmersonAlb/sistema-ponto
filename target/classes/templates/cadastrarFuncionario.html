@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Funcionários</title>
+</head>
+<body>
+    <div>
+        <h1>Cadastrar Funcionário</h1>
+        <form th:action="@{/cadastrarFuncionario}" method="post" th:object="${funcionario}">
+            <div>
+                <label for="nome_funcionario">Nome:</label>
+                <input type="text" id="nome_funcionario" name="nome_funcionario" th:field="*{nome_funcionario}" required>
+            </div>
+            <div>
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" th:field="*{matricula}" required>
+            </div>
+            <button type="submit">Registrar Funcionário</button>
+            <p><span th:text="${message}" style="color: red;"></span></p>
+        </form>
+        <a th:href="@{/}">Voltar</a>
+    </div>
+</body>
+</html>
