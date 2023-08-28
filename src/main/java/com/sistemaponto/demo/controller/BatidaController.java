@@ -38,9 +38,17 @@ public class BatidaController {
         if(result.hasErrors()){
             return "baterPonto";
         }
+
         Optional<FuncionarioModel> funcionarioOptional = funcionarioRepository.findByMatricula(batida.getMatricula());
         LocalDate date = LocalDate.now();
         LocalTime hora = LocalTime.now();
+
+        LocalTime inicioExpediente = LocalTime.of(7, 19);
+
+        if(hora.isBefore(inicioExpediente)){
+            model.addAttribute("erro", "Não é possível bater o ponto antes das 07h20min.");
+            return "baterPonto";
+        }
         
         if (funcionarioOptional.isPresent()) {
             Optional<BatidaModel> batidaOptional = batidaRepository.findByFuncionarioAndDia(funcionarioOptional.get(), date);

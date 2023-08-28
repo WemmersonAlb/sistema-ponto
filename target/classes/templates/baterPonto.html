@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer="defer" th:src="@{/script/dataHora.js}"></script>
+    <script defer="defer" th:src="@{/script/ultimosRegistros.js}"></script>
     <link rel="stylesheet" th:href="@{/css/baterPonto.css}">
     <title>Registrar Ponto</title>
 </head>
@@ -19,7 +20,7 @@
             <label for="matricula">Matrícula:</label>
             <input type="text" id="matricula" name="matricula" th:field="*{matricula}" required>
             <button type="submit">Bater Ponto</button>
-            <p><span th:text="${sucesso}" style="color: green;"></span></p>
+            <p><span th:text="${sucesso}" style="color: green;" id="feedback"></span></p>
             <p><span th:text="${erro}" style="color: red;"></span></p>
         </form>
         <a th:href="@{/}">Voltar</a>
