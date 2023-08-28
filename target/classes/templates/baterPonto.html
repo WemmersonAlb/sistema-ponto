@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer="defer" th:src="@{/script/dataHora.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/baterPonto.css}">
     <title>Registrar Ponto</title>
 </head>
 <body>
+    <div id="data-hora">
+        <div id='relogio'></div>
+        <div id='data'></div>
+        <div id='DiaDaSemana'></div>
+    </div>
     <div>
         <h1>Registrar ponto</h1>
         <form th:action="@{/baterPonto}" method="post" th:object="${batida}">
@@ -16,6 +23,10 @@
             <p><span th:text="${erro}" style="color: red;"></span></p>
         </form>
         <a th:href="@{/}">Voltar</a>
+    </div>
+
+    <div id="historico">
+        <div><h2>Últimos Registros</h2></div>
     </div>
 </body>
 </html>

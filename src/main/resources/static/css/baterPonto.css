@@ -1,0 +1,19 @@
+div#relogio{
+    margin-top:100px;
+    text-align:center;
+    font-size: 70px;
+}
+footer{
+    font-size:10px;
+    text-align:center;
+}
+div#data{
+    margin-top:10px;
+    text-align:center;
+    font-size:30px;
+}
+div#DiaDaSemana{
+    margin-top:10px;
+    text-align:center;
+    font-size:30px;
+}

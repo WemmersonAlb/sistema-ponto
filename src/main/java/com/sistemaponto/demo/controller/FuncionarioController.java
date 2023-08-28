@@ -74,9 +74,9 @@ public class FuncionarioController {
 
     @GetMapping("/editarFuncionario/{matricula}")
     public String showEditarFuncionario(@PathVariable String matricula,  Model model){
-        
+
         Optional<FuncionarioModel> funcionarOptional = funcionarioRepository.findByMatricula(matricula);
-        
+
         if(funcionarOptional.isPresent()){
             FuncionarioModel funcionarioModel = funcionarOptional.get();
             FuncionarioDTO funcionarioDTO = new FuncionarioDTO();
@@ -90,7 +90,30 @@ public class FuncionarioController {
         }
     }
 
-    @PostMapping("/editarFuncionario/{matricula}")
+    @PostMapping("/editarFuncionario")
+    public String editarFuncionario(@Valid @ModelAttribute("funcionario") FuncionarioDTO funcionario,
+                                    BindingResult result,
+                                    Model model){
+        if(result.hasErrors()){
+            model.addAttribute("erro", "Erro inesperado");
+            return listarFuncionario(model);
+        }
+
+        Optional<FuncionarioModel> funcionarioOptional = funcionarioRepository.findByMatricula(funcionario.getMatricula());
+
+        if(funcionarioOptional.isPresent()){
+            FuncionarioModel funcionarioModel = funcionarioOptional.get();
+            funcionarioModel.setNomeFuncionario(funcionario.getNome_funcionario());
+            funcionarioModel.setMatricula(funcionario.getMatricula());
+            funcionarioRepository.save(funcionarioModel);
+            String message = String.format("%s atualizado com sucesso.", funcionarioModel.getNomeFuncionario());
+            model.addAttribute("message", message);
+            return listarFuncionario(model);
+        }else{
+            model.addAttribute("erro", "Erro inesperado");
+            return listarFuncionario(model);
+        }
+    }
 
     @GetMapping("/downloadPlanilha/{matricula}")
     public ResponseEntity<ByteArrayResource> downloadPlanilha(@PathVariable String matricula){

@@ -23,9 +23,16 @@
                     <td th:text="${funcionario.nomeFuncionario}"></td>
                     <td th:text="${funcionario.matricula}"></td>
                     <td>
-                        <a th:href="@{/downloadPlanilha/{matricula}(matricula=${funcionario.matricula})}">
-                            <button type="button">Baixar Planilha</button>
-                        </a>
+                        <div>
+                            <a th:href="@{/downloadPlanilha/{matricula}(matricula=${funcionario.matricula})}">
+                                <button type="button">Baixar Planilha</button>
+                            </a>
+                        </div>
+                        <div>
+                            <a th:href="@{/editarFuncionario/{matricula}(matricula=${funcionario.matricula})}">
+                                <button type="button">Editar Funcionário</button>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>
